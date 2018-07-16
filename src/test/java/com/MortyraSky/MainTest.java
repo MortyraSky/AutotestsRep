@@ -9,15 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-        /*
-             UPD
-             если определить и найти локатор на одной странице и
-             попытаться использовать его на другой, при условии что локаторы совпадают
-             тесты будут валиться.
-             Нужно заводить новые переменные! со значение
-          */
+import java.util.concurrent.TimeUnit;       
 
 public class MainTest {
     private static WebDriver driver;
@@ -32,14 +24,15 @@ public class MainTest {
     }
     @Test
     public void lookingForWthrFrcst() throws InterruptedException {
+                    
         WebElement inputField = driver.findElement(By.cssSelector("input[name='text']"));
-        inputField.sendKeys("погода пенза");
-        Thread.sleep(1000);
+        inputField.sendKeys("погода пенза");        
+        
         WebElement findBtn = driver.findElement(By.cssSelector("button[type='submit']"));
         findBtn.click();
-        WebElement headerLink = driver.findElement(By.cssSelector("a[href*='pogoda/penza?'] > .organic__url-text"));
+        
+        WebElement headerLink = driver.findElement(By.cssSelector("a[href*='pogoda/penza?']"));
         String takeTextLink  = headerLink.getText();
-
         Assert.assertTrue(takeTextLink.contains("Погода"));
 
 
@@ -47,9 +40,12 @@ public class MainTest {
 
     @Test
     public static void setClearInputFld(){
+            //очистка поля инпут для будущих тестов!            
         WebElement inpFld =  driver.findElement(By.cssSelector("input[name='text']"));
+            
         if (inpFld.isEnabled())
             inpFld.clear();
+            
         else {
             inpFld.click();
             inpFld.clear();
@@ -57,13 +53,9 @@ public class MainTest {
 
 
     }
+        
     @AfterClass
-    public static void tearDown() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void tearDown() {      
 
         driver.quit();
     }
