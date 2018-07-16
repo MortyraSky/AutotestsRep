@@ -23,36 +23,24 @@ public class MainTest {
         driver.get("https://ya.ru");
     }
     @Test
-    public void lookingForWthrFrcst() throws InterruptedException {
+    public void lookingForWeatherForecast() throws InterruptedException {
                     
         WebElement inputField = driver.findElement(By.cssSelector("input[name='text']"));
-        inputField.sendKeys("погода пенза");        
-        
         WebElement findBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        
+        
+        inputField.sendKeys("погода пенза");     
+                
         findBtn.click();
         
-        WebElement headerLink = driver.findElement(By.cssSelector("a[href*='pogoda/penza?']"));
+        WebElement headerLink = driver.findElement(By.xpath("//*[@role='main']/descendant::h2[1]/a"));       
         String takeTextLink  = headerLink.getText();
+        
         Assert.assertTrue(takeTextLink.contains("Погода"));
 
 
     }
-
-    @Test
-    public static void setClearInputFld(){
-            //очистка поля инпут для будущих тестов!            
-        WebElement inpFld =  driver.findElement(By.cssSelector("input[name='text']"));
-            
-        if (inpFld.isEnabled())
-            inpFld.clear();
-            
-        else {
-            inpFld.click();
-            inpFld.clear();
-        }
-
-
-    }
+    
         
     @AfterClass
     public static void tearDown() {      
