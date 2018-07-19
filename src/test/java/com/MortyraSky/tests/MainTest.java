@@ -11,24 +11,13 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;       
 
-public class MainTest {
+public class MainTest extends InitializeDeleteDriver{
 
-    private static WebDriver driver;
+    
     public static SearchPage searchPage;
     public static SearchResultPage searchResultPage;
 
-    @BeforeClass
-    public static void setDriver(){
-        System.setProperty("webdriver.chrome.driver", "./src/chromedriver.exe");
-        driver = new ChromeDriver();
-        searchPage = new SearchPage(driver);
-        searchResultPage = new SearchResultPage(driver);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://ya.ru");
-
-    }
-
+    
     @Test
     public void SearchPageTest() {
         String query = "погода пенза";
@@ -43,13 +32,7 @@ public class MainTest {
         String wordInQuery = "Погода";
         String textLink = searchResultPage.getTextLink();
         Assert.assertTrue(textLink.contains(wordInQuery));
-    }
-    
-        
-    @AfterClass
-    public static void tearDown() {      
-
-        driver.quit();
-    }
+    }      
+   
 
 }
