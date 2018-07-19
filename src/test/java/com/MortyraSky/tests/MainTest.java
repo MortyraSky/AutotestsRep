@@ -35,27 +35,7 @@ public class MainTest {
 
         searchPage.queryInInputField(query);
         searchPage.clickFindButton();
-        /*
-        WebElement inputField = driver.findElement(By.cssSelector("input[name='text']"));
-        WebElement findBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-        
-        if(inputField.isEnabled()){
-            inputField.clear();
-            inputField.sendKeys("погода пенза");
-        }
-        else{
-            inputField.click();
-            inputField.clear();
-            inputField.sendKeys("погода пенза");
-        }     
-                
-        findBtn.click();
-        
-        WebElement headerLink = driver.findElement(By.xpath("//*[@role='main']/descendant::h2[1]/a"));       
-        String takeTextLink  = headerLink.getText();
-        
-        Assert.assertTrue(takeTextLink.contains("Погода"));
-        */
+       
     }
 
     @Test
