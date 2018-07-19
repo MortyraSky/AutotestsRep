@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 
 public class InitializeDeleteDriver {
 
-    private static WebDriver driver;
-    private static SearchPage searchPage;
-    private static SearchResultPage searchResultPage;
+    public static WebDriver driver;
+    public static SearchPage searchPage;
+    public static SearchResultPage searchResultPage;
     
 
     @BeforeClass
