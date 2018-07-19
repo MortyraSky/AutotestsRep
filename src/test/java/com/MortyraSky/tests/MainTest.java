@@ -10,9 +10,11 @@ public class MainTest extends InitializeDeleteDriver {
     @Test
     public void SearchTest() {
         
+        String URL = "https://ya.ru";
         String query = "погода пенза";
         String wordInQuery = "Погода";
 
+        searchPage.navigate(URL);
         searchPage.queryInInputField(query);
         searchPage.clickFindButton();
 

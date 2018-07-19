@@ -14,7 +14,7 @@ public class SearchPage {
 
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        driver.get("https://ya.ru");
+
     }
     public WebDriver driver;
 
@@ -31,6 +31,10 @@ public class SearchPage {
 
      public void clickFindButton(){
         findBtn.click();
+     }
+
+     public void navigate(String URL){
+         driver.get(URL);
      }
 
 }
