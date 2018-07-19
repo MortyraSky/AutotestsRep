@@ -9,15 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-        /*
-             UPD
-             если определить и найти локатор на одной странице и
-             попытаться использовать его на другой, при условии что локаторы совпадают
-             тесты будут валиться.
-             Нужно заводить новые переменные! со значение
-          */
+import java.util.concurrent.TimeUnit;       
 
 public class MainTest {
     private static WebDriver driver;
@@ -31,39 +23,34 @@ public class MainTest {
         driver.get("https://ya.ru");
     }
     @Test
-    public void lookingForWthrFrcst() throws InterruptedException {
+    public void lookingForWeatherForecast() throws InterruptedException {
+                    
         WebElement inputField = driver.findElement(By.cssSelector("input[name='text']"));
-        inputField.sendKeys("погода пенза");
-        Thread.sleep(1000);
         WebElement findBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        
+        if(inputField.isEnabled()){
+            inputField.clear();
+            inputField.sendKeys("погода пенза");
+        }
+        else{
+            inputField.click();
+            inputField.clear();
+            inputField.sendKeys("погода пенза");
+        }     
+                
         findBtn.click();
-        WebElement headerLink = driver.findElement(By.cssSelector("a[href*='pogoda/penza?'] > .organic__url-text"));
+        
+        WebElement headerLink = driver.findElement(By.xpath("//*[@role='main']/descendant::h2[1]/a"));       
         String takeTextLink  = headerLink.getText();
-
+        
         Assert.assertTrue(takeTextLink.contains("Погода"));
 
 
     }
-
-    @Test
-    public static void setClearInputFld(){
-        WebElement inpFld =  driver.findElement(By.cssSelector("input[name='text']"));
-        if (inpFld.isEnabled())
-            inpFld.clear();
-        else {
-            inpFld.click();
-            inpFld.clear();
-        }
-
-
-    }
+    
+        
     @AfterClass
-    public static void tearDown() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void tearDown() {      
 
         driver.quit();
     }
