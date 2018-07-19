@@ -12,11 +12,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;       
 
 public class MainTest extends InitializeDeleteDriver{
-
-    
-    public static SearchPage searchPage;
-    public static SearchResultPage searchResultPage;
-
+     
     
     @Test
     public void SearchPageTest() {
