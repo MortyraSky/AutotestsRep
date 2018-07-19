@@ -9,7 +9,7 @@ public class MainTest extends InitializeDeleteDriver {
 
     @Test
     public void SearchTest() {
-        driver.get("https://ya.ru");
+        
         String query = "погода пенза";
         String wordInQuery = "Погода";
 

@@ -14,8 +14,10 @@ public class SearchPage {
 
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        driver.get("https://ya.ru");
     }
     public WebDriver driver;
+
 
     @FindBy(css = "input[name='text']")
     private WebElement inputField;
