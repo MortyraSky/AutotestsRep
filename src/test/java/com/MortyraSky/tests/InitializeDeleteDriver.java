@@ -1,7 +1,19 @@
+package com.MortyraSky.tests;
 
-public class MainTest {
+import com.MortyraSky.pages.SearchResultPage;
+import com.MortyraSky.pages.SearchPage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class InitializeDeleteDriver {
 
     private static WebDriver driver;
+    private static SearchPage searchPage;
+    private static SearchResultPage searchResultPage;
     
 
     @BeforeClass
