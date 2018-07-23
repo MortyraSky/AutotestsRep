@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Admin on 23.07.2018.
  */
-public class LocationPage {
+public class LocationPage{
 
     public LocationPage(WebDriver driver){
         PageFactory.initElements(driver, this);
@@ -18,15 +18,38 @@ public class LocationPage {
     public WebDriver driver;
 
     @FindBy(css = "input[name='name']")
-    protected WebElement inputLocationField;
+    private WebElement inputLocationField;
 
 
     @FindBy(css = "button[type='submit']")
-    protected WebElement saveLocationBtn;
+    private WebElement saveLocationBtn;
 
     @FindBy(xpath = "//*[@class='popup__content']/descendant::ul/li[1]")
-    protected WebElement cityInList;
+    private WebElement cityInList;
 
+    public void changeLocation(String city){
+
+        if(inputLocationField.isSelected())
+        {
+
+            inputLocationField.clear();
+            inputLocationField.sendKeys(city);
+            System.out.println("Поле инпут заполнено: " + city);
+        }
+        else {
+            inputLocationField.click();
+            inputLocationField.clear();
+            inputLocationField.sendKeys(city);
+            System.out.println("Поле инпут заполнено: " + city);
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        cityInList.click();
+    }
 
 
 }

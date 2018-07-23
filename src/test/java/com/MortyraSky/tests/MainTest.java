@@ -1,10 +1,15 @@
 package com.MortyraSky.tests;
 
-import com.MortyraSky.Manage.ControlDriver;
+import com.MortyraSky.pages.LocationPage;
+import com.MortyraSky.pages.MainPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MainTest extends ControlDriver {
+public class MainTest extends BaseTest {
+
+
+    public MainPage mainPage;
+    public LocationPage locationPage;
 
 
 
@@ -14,29 +19,22 @@ public class MainTest extends ControlDriver {
         String URL = "https://yandex.ru";
         String city1 = "Роттердам";
         String city2 = "Лос-Анджелес";
-        String countMoreLinkC1;
-        String countMoreLinkC2;
+        int countMoreLinkC1;
+        int countMoreLinkC2;
+        mainPage = new MainPage(driver);
+        locationPage= new LocationPage(driver);
 
-        mainPageTest.navigate(URL);
-        mainPageTest.clickLocationLink();
+        mainPage.navigate(URL);
 
-        locationPageTest.setInputLocationField(city1);
-        locationPageTest.takeCityInList();
+        mainPage.clickLocationLink();
+        locationPage.changeLocation(city1);
+        countMoreLinkC1 = mainPage.getCountMoreLinks(city1);
 
-        mainPageTest.clickTabMoreLink();
-        countMoreLinkC1 = mainPageTest.countMoreLinks(city1);
-        mainPageTest.clickTabMoreLink();
+        mainPage.clickLocationLink();
+        locationPage.changeLocation(city2);
+        countMoreLinkC2 = mainPage.getCountMoreLinks(city2);
 
-        mainPageTest.clickLocationLink();
-
-        locationPageTest.setInputLocationField(city2);
-        locationPageTest.takeCityInList();
-
-        mainPageTest.clickTabMoreLink();
-        countMoreLinkC2 = mainPageTest.countMoreLinks(city2);
-        mainPageTest.clickTabMoreLink();
-
-        Assert.assertTrue(countMoreLinkC1.contains(countMoreLinkC2));
+        Assert.assertEquals(countMoreLinkC1, countMoreLinkC2);
 
 
     }

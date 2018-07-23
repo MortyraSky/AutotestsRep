@@ -18,17 +18,56 @@ public class MainPage {
     }
     public WebDriver driver;
 
+
     @FindBy(xpath = "//*[@class='row']/descendant::div[1]/a")
-    protected WebElement locationLink;
+    private WebElement locationLink;
     // WebElement inputField = driver.findElement(By.cssSelector("input[name='text']"));
 
     @FindBy(xpath = "//*[@class='home-tabs__more-item']")
-    protected List<WebElement> moreLinks;
+    private List<WebElement> moreLinks;
 
     @FindBy(xpath = "//a[@data-statlog='tabs.more']")
-    protected WebElement tabMoreLink;
+    private WebElement tabMoreLink;
 
     //List <WebElement> moreLinks = driver.findElements(By.xpath("//*[@class='home-tabs__more-item']"));
+
+    public void clickLocationLink(){
+
+        System.out.println("Переход по локатору:" + locationLink.getText());
+        locationLink.click();
+
+
+    }
+
+    public int getCountMoreLinks(String city){
+
+        System.out.println("Переход по локатору:" + tabMoreLink.getText());
+        tabMoreLink.click();
+        System.out.println("Количество элементов во вкладке 'ещё' для города : "+ city + " = " + moreLinks.size() );
+        //count += moreLinks.size();
+        tabMoreLink.click();
+        return moreLinks.size();
+
+    }
+
+    /*
+    public void clickTabMoreLink(){
+        System.out.println("Переход по локатору:" + tabMoreLink.getText());
+        tabMoreLink.click();
+
+    }
+
+    public String countMoreLinks(String city){
+        System.out.println("Количество элементов во вкладке 'ещё' для города : "+ city + " = " + moreLinks.size() );
+        String count = "";
+        return count += moreLinks.size();
+    }
+    */
+
+    public void navigate(String URL){
+        driver.get(URL);
+        System.out.println("Переход на:" + URL);
+    }
 
 
 
