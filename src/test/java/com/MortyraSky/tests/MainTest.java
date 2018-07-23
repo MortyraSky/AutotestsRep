@@ -11,14 +11,16 @@ public class MainTest extends BaseTest {
     public MainPage mainPage;
     public LocationPage locationPage;
 
+    final String city1 = "Роттердам";
+    final String city2 = "Лос-Анджелес";
+
 
 
     @Test
     public void SearchTest() {
         
         String URL = "https://yandex.ru";
-        String city1 = "Роттердам";
-        String city2 = "Лос-Анджелес";
+
         int countMoreLinkC1;
         int countMoreLinkC2;
         mainPage = new MainPage(driver);

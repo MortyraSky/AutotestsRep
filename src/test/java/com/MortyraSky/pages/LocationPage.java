@@ -29,25 +29,9 @@ public class LocationPage{
 
     public void changeLocation(String city){
 
-        if(inputLocationField.isSelected())
-        {
-
-            inputLocationField.clear();
-            inputLocationField.sendKeys(city);
-            System.out.println("Поле инпут заполнено: " + city);
-        }
-        else {
-            inputLocationField.click();
-            inputLocationField.clear();
-            inputLocationField.sendKeys(city);
-            System.out.println("Поле инпут заполнено: " + city);
-        }
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        inputLocationField.clear();
+        inputLocationField.sendKeys(city);
+        System.out.println("Поле инпут заполнено: " + city);
         cityInList.click();
     }
 
