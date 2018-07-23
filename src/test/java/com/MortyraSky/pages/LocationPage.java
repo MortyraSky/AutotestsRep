@@ -31,8 +31,13 @@ public class LocationPage{
 
         inputLocationField.clear();
         inputLocationField.sendKeys(city);
-        System.out.println("Поле инпут заполнено: " + city);
+        try {
+            Thread.sleep(1100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         cityInList.click();
+        System.out.println("Поле инпут заполнено: " + city);
     }
 
 

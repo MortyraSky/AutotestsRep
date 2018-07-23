@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class MainPage {
         this.driver = driver;
     }
     public WebDriver driver;
+    ArrayList<String> elementsMore = new ArrayList<String>();
 
 
     @FindBy(xpath = "//*[@class='row']/descendant::div[1]/a")
@@ -36,45 +38,25 @@ public class MainPage {
         System.out.println("Переход по локатору:" + locationLink.getText());
         locationLink.click();
 
-
     }
 
-    public int getCountMoreLinks(String city){
+    public ArrayList<String> getCountMoreLinks(String city){
 
         System.out.println("Переход по локатору:" + tabMoreLink.getText());
         tabMoreLink.click();
         System.out.println("Количество элементов во вкладке 'ещё' для города : "+ city + " = " + moreLinks.size() );
-        //count += moreLinks.size();
+
+        if (!elementsMore.isEmpty())
+            elementsMore.clear();
 
         for(WebElement e : moreLinks) {
             System.out.println(e.getText());
-            //не количесвто
-            //а то тексты ссылок одинаковы
-            // нужно сравнивать массивы ссылок разных городов, наверное использовать массив String сначало записать в массив, передать а сравнивать через ассерт
-            //changeLocation - надо переписать, там метод в 3-4 строчки
-            //Если первый раз не кликнуть, то драйвер не найдет ссылки в меню еще. А второй для закрытия вкладки ещене может такого быть
-            //changeLocation - надо переписать, там метод в 3-4 строчки
-            //имплисити вейт больше поставь
+            elementsMore.add(e.getText());
+
         }
-
-        tabMoreLink.click();
-        return moreLinks.size();
+        return elementsMore;
 
     }
-
-    /*
-    public void clickTabMoreLink(){
-        System.out.println("Переход по локатору:" + tabMoreLink.getText());
-        tabMoreLink.click();
-
-    }
-
-    public String countMoreLinks(String city){
-        System.out.println("Количество элементов во вкладке 'ещё' для города : "+ city + " = " + moreLinks.size() );
-        String count = "";
-        return count += moreLinks.size();
-    }
-    */
 
     public void navigate(String URL){
         driver.get(URL);
