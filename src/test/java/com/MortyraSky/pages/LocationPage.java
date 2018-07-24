@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 /**
  * Created by Admin on 23.07.2018.
+ * в случае завала теста добавить слип в метод changeLocation
  */
 public class LocationPage{
 
@@ -31,11 +32,7 @@ public class LocationPage{
 
         inputLocationField.clear();
         inputLocationField.sendKeys(city);
-        try {
-            Thread.sleep(1100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         cityInList.click();
         System.out.println("Поле инпут заполнено: " + city);
     }
