@@ -13,30 +13,30 @@ public class MainTest extends BaseTest {
     public MainPage mainPage;
     public LocationPage locationPage;
 
-    final String city1 = "Роттердам";
-    final String city2 = "Лос-Анджелес";
+    final String CITY1 = "Роттердам";
+    final String CITY2 = "Лос-Анджелес";
+    final String URL = "https://yandex.ru";
 
     @Test
     public void SearchTest() {
         
-        String URL = "https://yandex.ru";
+
 
         ArrayList<String> moreLinkCity1;
         ArrayList<String> moreLinkCity2;
-        //List<String> strList = new ArrayList<String>();
-        //strList.clear();
+        
         mainPage = new MainPage(driver);
         locationPage= new LocationPage(driver);
 
         mainPage.navigate(URL);
 
         mainPage.clickLocationLink();
-        locationPage.changeLocation(city1);
-        moreLinkCity1 = mainPage.getCountMoreLinks(city1);
+        locationPage.changeLocation(CITY1);
+        moreLinkCity1 = mainPage.getCountMoreLinks(CITY1);
 
         mainPage.clickLocationLink();
-        locationPage.changeLocation(city2);
-        moreLinkCity2 = mainPage.getCountMoreLinks(city2);
+        locationPage.changeLocation(CITY2);
+        moreLinkCity2 = mainPage.getCountMoreLinks(CITY2);
 
         for (int i = 0; i < moreLinkCity1.size(); i++) {
             Assert.assertEquals(moreLinkCity1.get(i), moreLinkCity2.get(i));
