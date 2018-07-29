@@ -70,13 +70,7 @@ public class MarketSortPage {
         }
         return true;
         /*
-        for(int i = 0; i < stringPriceItems.size(); i++){
-            String strThousand = stringPriceItems.get(i).substring(0,1);
-            strThousand += stringPriceItems.get(i).substring(2,5);
-            System.out.println("Перевод : "+ stringPriceItems.get(i)+" в :" + strThousand);
-            priceItems.add(Integer.parseInt(strThousand));
-            System.out.println("Результат в числовом варианет: " + priceItems.get(i));
-        }
+        
         // рабочий вариант клика по нужному элементу, использовать для добавления в сравнение!!!!!!!!!!!!!!!!!!!!!
         sortedPrice.get(1).click();
         */
