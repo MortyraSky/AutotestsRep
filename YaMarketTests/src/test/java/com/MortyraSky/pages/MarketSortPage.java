@@ -1,5 +1,6 @@
 package com.MortyraSky.pages;
 
+import com.MortyraSky.tests.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ public class MarketSortPage {
         this.driver = driver;
     }
     public WebDriver driver;
+    final String nameAttributeElement = "class";
     //ArrayList<String> stringPriceItems = new ArrayList<String>();
     ArrayList<Integer> priceItems = new ArrayList<Integer>();
 
@@ -33,28 +35,19 @@ public class MarketSortPage {
 
 
     public boolean sortByPrice(){
-        int i = 0;
+        int i = 0,time = 2;
+        boolean result;
+        String attributeBeforeSort, attributeAfterSort;
 
-        getAttributeElement(sortByPrice);
+
+        attributeBeforeSort = getAttributeElement(sortByPrice);
         sortByPriceLink.click();
+        BaseTest.waitForElements(time);
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println("Attribute sortLink by class: " + sortByPriceLink.getAttribute("class"));
-        getAttributeElement(sortByPrice);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        attributeAfterSort = getAttributeElement(sortByPrice);
+        BaseTest.waitForElements(time);
         System.out.println("Количество отсортированных элементов по цене : " + sortedPrice.size() );
-
 
         if (!priceItems.isEmpty())
             priceItems.clear();
@@ -63,24 +56,34 @@ public class MarketSortPage {
 
             System.out.println(e.getText());
             String strThousand = e.getText().substring(0,1) + e.getText().substring(2,5);
-            System.out.println("Перевод : " + strThousand);
+            //System.out.println("Перевод : " + strThousand);
             priceItems.add(Integer.parseInt(strThousand));
-            System.out.println("Результат в числовом варианет: " + priceItems.get(i));
+            //System.out.println("Результат в числовом варианет: " + priceItems.get(i));
             i++;
         }
-        return true;
+        result = isSortByPrice(attributeBeforeSort, attributeAfterSort);
+        return isSortByPrice(attributeBeforeSort, attributeAfterSort);
+
+        //return true;
         /*
-        
         // рабочий вариант клика по нужному элементу, использовать для добавления в сравнение!!!!!!!!!!!!!!!!!!!!!
         sortedPrice.get(1).click();
         */
     }
 
-    public void getAttributeElement(WebElement element){
-        System.out.println("Attribute sortLink by class: " + element.getAttribute("class"));
-        System.out.println("Attribute sortLink by class: " + element.getAttribute("class"));
-        System.out.println("Attribute sortLink by getText: " + element.getText());
+    public String getAttributeElement(WebElement element){
+        System.out.println("Attribute by class: " + element.getAttribute("class"));
+        String attributeElement = element.getAttribute(nameAttributeElement);
+        return attributeElement;
 
+        //System.out.println("Attribute sortLink by getText: " + element.getText());
+
+    }
+
+    public boolean isSortByPrice(String attributeBefore, String attributeAfter){
+        if (attributeBefore.equals(attributeAfter))
+            return false;
+        return true;
     }
 
     public boolean isSortedItems(){

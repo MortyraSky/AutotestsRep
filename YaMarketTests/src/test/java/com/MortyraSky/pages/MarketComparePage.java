@@ -1,5 +1,6 @@
 package com.MortyraSky.pages;
 
+import com.MortyraSky.tests.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -42,15 +43,12 @@ public class MarketComparePage {
     private WebElement goMarket;
 
     public void getItemsToCompare(int firstItem, int secondItem) {
+        int time = 2;
         Actions actions = new Actions(driver);
         actions.moveToElement(itemsToCompare.get(firstItem));
         itemsToCompare.get(firstItem).click();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        BaseTest.waitForElements(time);
 
         actions.moveToElement(itemsToCompare.get(secondItem));
         itemsToCompare.get(secondItem).click();
@@ -68,20 +66,16 @@ public class MarketComparePage {
     }
 
     public String getAfterRemoveText() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        int time = 2;
+        BaseTest.waitForElements(time);
         return afterRemoveText.getText();
 
     }
     public void goToMarket(By locator){
-        //Actions actions = new Actions(driver);
-        //actions.moveToElement(goMarket);
+
         WebElement element = driver.findElement(locator);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", element);
-        //goMarket.click();
+
     }
 }

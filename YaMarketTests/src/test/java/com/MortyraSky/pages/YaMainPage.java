@@ -1,5 +1,6 @@
 package com.MortyraSky.pages;
 
+import com.MortyraSky.tests.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,38 +21,6 @@ public class YaMainPage {
     @FindBy(css = "a.logo:nth-child(1)")
     private WebElement linkTitle;
 
-    /*
-    @FindBy(xpath = "//div[@role='navigation']/a[1]")
-    private WebElement videoLink;
-
-    @FindBy(xpath = "//div[@role='navigation']/a[2]")
-    private WebElement imageLink;
-
-    @FindBy(xpath = "//div[@role='navigation']/a[3]")
-    private WebElement newsLink;
-
-    @FindBy(xpath = "//div[@role='navigation']/a[4]")
-    private WebElement mapsLink;
-
-    @FindBy(xpath = "//div[@role='navigation']/a[5]")
-    private WebElement marketLink;
-
-    @FindBy(xpath = "//div[@role='navigation']/a[6]")
-    private WebElement translateLink;
-
-    @FindBy(xpath = "//div[@role='navigation']/a[7]")
-    private WebElement musicLink;
-
-    @FindBy(xpath = "//div[@class='tabs-navigation__content']/a[3]")
-    private WebElement videoTabs;
-
-    public String getTextLink(WebElement element){
-        String textLink = element.getText();
-        System.out.println("Text of link: " + textLink);
-        return textLink;
-    }
-
-*/
 
     public String getAttributeHref(WebElement element){
         String href = element.getAttribute("href");
@@ -68,17 +37,14 @@ public class YaMainPage {
     public boolean goToPage(By locator, String pageTitle){
         String currentURL,currentTitle, hrefElements;
         boolean addresCompareRes, titleCompareRes, resuleNavigate;
+        int time = 3;
+
 
         WebElement element = driver.findElement(locator);
         hrefElements = getAttributeHref(element);
 
         element.click();
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        BaseTest.waitForElements(time);
 
         currentURL = driver.getCurrentUrl();
         currentTitle = driver.getTitle();

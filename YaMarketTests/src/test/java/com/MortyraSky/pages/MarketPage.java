@@ -33,8 +33,8 @@ public class MarketPage {
     @FindBy(css = "a[href*='54545']")
     private WebElement subMenuItemPads;
 
-    @FindBy(xpath = "//*[@class='popup2__content']/descendant::div/span")
-    private WebElement locWindow; //
+    //@FindBy(xpath = "//*[@class='popup2__content']/descendant::div/span")
+    //private WebElement locWindow; //
 
     @FindBy(css = ".n-snippet-card2")
     private List<WebElement> linksItem;
@@ -52,23 +52,20 @@ public class MarketPage {
     public void selectCategory() {
 
         //locWindow.click();
+
+        int time = 1;
         Actions actions = new Actions(driver);
         actions.moveToElement(menuItemComps);
         actions.perform();
-        //BaseTest.waitForElement(By.cssSelector("a[href*='54545']"));
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //BaseTest.waitForElement(subMenuItemPads);
+        BaseTest.waitForElements(time);
 
         subMenuItemPads.click();
 
     }
 
     public void changeItemsCount(){
+        //BaseTest.waitForElement(By.cssSelector("a[href*='54545']"));
         Actions actions = new Actions(driver);
         actions.moveToElement(btnSelect);
         btnSelect.click();
@@ -77,6 +74,7 @@ public class MarketPage {
 
     public int getItemsCount(int count){
 
+        int time = 3;
         changeItemsCount();
 
         if(count == 12)
@@ -85,33 +83,12 @@ public class MarketPage {
         else if(count == 48)
             secondValueList.click();
 
-        //BaseTest.waitForElement(By.cssSelector(".n-snippet-card2"));
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        BaseTest.waitForElements(time);
 
         System.out.println("Количество показанных элементов на странице, выбрав отображение по " +count+ " элементов: " + linksItem.size());
         return linksItem.size();
 
     }
-
-    /*
-    public void display12Items() {
-        changeItemsCount();
-        firstValueList.click();
-        int count12LinksItem = linksItem.size();
-        System.out.println("Количество показанных элементов на странице: " + count12LinksItem);
-
-    }
-
-    public void display48Items(){
-        changeItemsCount();
-        secondValueList.click();
-        int count48LinksItem = linksItem.size();
-        System.out.println("Количество показанных элементов на странице: " + count48LinksItem);
-    }*/
 
     public void navigate(String URL) {
         driver.get(URL);
