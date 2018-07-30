@@ -24,7 +24,7 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "./src/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
     }
 
@@ -37,12 +37,18 @@ public class BaseTest {
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public static void waitForElements(int time){
+    public static void waitForElementt(By locators){
+        (new WebDriverWait(driver, 12))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locators));
+    }
+    public static void waitForElements(int time) {
+
         try {
-            Thread.sleep(time*1000);
+            Thread.sleep(time * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     @AfterClass

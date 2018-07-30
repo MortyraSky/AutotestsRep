@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
 
     final int TWELVEITEMS = 12;
     final int FORTYEIGHTITEMS = 48;//forty eight
-    final int COUNTITEMSTOCOMPARE = 2;
+
     final int FIRSTITEMINLIST = 0;
     final int SECONDITEMINLIST = 1;
 
@@ -37,10 +37,12 @@ public class MainTest extends BaseTest {
         int countItems;
 
         marketPage.navigate(URL);
-        marketPage.selectCategory();
-        countItems = marketPage.getItemsCount(TWELVEITEMS);
+        marketPage.selectCategoryPads();
+        marketPage.changeItemsCount(TWELVEITEMS);
+        countItems = marketPage.getItemsCount();
         Assert.assertEquals(countItems,TWELVEITEMS);
-        countItems = marketPage.getItemsCount(FORTYEIGHTITEMS);
+        marketPage.changeItemsCount(FORTYEIGHTITEMS);
+        countItems = marketPage.getItemsCount();
         Assert.assertEquals(countItems, FORTYEIGHTITEMS);
 
     }
@@ -50,9 +52,10 @@ public class MainTest extends BaseTest {
         marketSortPage = new MarketSortPage(driver);
         boolean resultSort, usedSortByPryce;
 
-        usedSortByPryce = marketSortPage.sortByPrice();
+        marketSortPage.sortByPrice();
+        usedSortByPryce = marketSortPage.isSortByPrice();
         Assert.assertTrue(usedSortByPryce);
-        resultSort = marketSortPage.isSortedItems();
+        resultSort = marketSortPage.isSortedItemsByPrice();
         Assert.assertTrue(resultSort);
     }
 
@@ -60,11 +63,11 @@ public class MainTest extends BaseTest {
     public void marketTest3(){
         marketComparePage = new MarketComparePage(driver);
         String takeTitle;
-        int countItemsInCompare;
+        boolean resCompareItems;
 
         marketComparePage.getItemsToCompare(FIRSTITEMINLIST, SECONDITEMINLIST);
-        countItemsInCompare = marketComparePage.getCountCompareItems();
-        Assert.assertEquals(COUNTITEMSTOCOMPARE, countItemsInCompare);
+        resCompareItems = marketComparePage.compareItems();
+        Assert.assertTrue(resCompareItems);
         marketComparePage.removeItemsFromCompare();
         takeTitle = marketComparePage.getAfterRemoveText();
         Assert.assertTrue(takeTitle.contains(MATCHINTEXT));
@@ -77,12 +80,9 @@ public class MainTest extends BaseTest {
         boolean resultToNavigate;
 
         yaMainPage.goToYa();
-        for (int i=1; i < 8; i++){
-        resultToNavigate = yaMainPage.goToPage(By.xpath("//div[@role='navigation']/a["+i+"]"), TITLEPAGES[i]);
-        System.out.println("Result navigate to pages: " + resultToNavigate);
+        resultToNavigate = yaMainPage.goToPagesAndVerifyPages(TITLEPAGES);
         Assert.assertTrue(resultToNavigate);
 
-        }
     }
 
 }

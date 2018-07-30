@@ -22,13 +22,22 @@ public class MarketComparePage {
     }
 
     public WebDriver driver;
+
     ArrayList<String> toCompare = new ArrayList<String>();
 
     @FindBy(xpath = "//*[@class='n-snippet-card2__toolbar']/descendant::div/i[1]")
-    private List<WebElement> itemsToCompare;
+    private List<WebElement> addToCompare;
 
     @FindBy(xpath = "//*[@class='popup-informer__content']/descendant::div/a")
     private WebElement compareBtn;
+
+    @FindBy(css = ".n-snippet-card2__title")
+    private List<WebElement> titleItems;
+
+    @FindBy(css = "a[class='n-compare-head__name link']")
+    private List<WebElement> titleItemsInCompare;
+
+    // a[class='n-compare-head__name link']
 
     @FindBy(xpath = "//*[@class='n-compare-content__line i-bem n-compare-content__line_js_inited']/div")
     private List<WebElement> countCompareItems;
@@ -45,15 +54,30 @@ public class MarketComparePage {
     public void getItemsToCompare(int firstItem, int secondItem) {
         int time = 2;
         Actions actions = new Actions(driver);
-        actions.moveToElement(itemsToCompare.get(firstItem));
-        itemsToCompare.get(firstItem).click();
+        actions.moveToElement(addToCompare.get(firstItem));
+        addToCompare.get(firstItem).click();
 
-        BaseTest.waitForElements(time);
+        BaseTest.waitForElement(By.xpath("//*[@class='n-snippet-card2__toolbar']/descendant::div/i[1]"));
+        //BaseTest.waitForElements(time);
 
-        actions.moveToElement(itemsToCompare.get(secondItem));
-        itemsToCompare.get(secondItem).click();
+        actions.moveToElement(addToCompare.get(secondItem));
+        addToCompare.get(secondItem).click();
 
+        toCompare.add(titleItems.get(firstItem).getText());
+        toCompare.add(titleItems.get(secondItem).getText());
+
+    }
+
+    public boolean compareItems(){
+        boolean resCompare = false;
         compareBtn.click();
+        System.out.println(toCompare.size() + " : " + titleItemsInCompare.size());
+        for (int i = 0;i < titleItemsInCompare.size(); i++)
+            for (int j = toCompare.size() - 1;j >= 0; j--)
+                if (titleItemsInCompare.get(i).getText().contains(toCompare.get(j)))
+                    resCompare = true;
+
+        return resCompare;
     }
 
     public int getCountCompareItems() {

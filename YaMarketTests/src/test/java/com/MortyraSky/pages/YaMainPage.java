@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
 /*
 Проверить навигацию. Открыть яндекс,
 нажать на видео, картинки, новости, карты, маркет, переводчик, музыка.
@@ -17,6 +19,10 @@ public class YaMainPage {
         this.driver = driver;
     }
     public WebDriver driver;
+
+    ArrayList<String> currentURL = new ArrayList<String>();
+    ArrayList<String> hrefElements = new ArrayList<String>();
+    ArrayList<String> currentTitle = new ArrayList<String>();
 
     @FindBy(css = "a.logo:nth-child(1)")
     private WebElement linkTitle;
@@ -34,35 +40,37 @@ public class YaMainPage {
         linkTitle.click();
     }
 
-    public boolean goToPage(By locator, String pageTitle){
-        String currentURL,currentTitle, hrefElements;
-        boolean addresCompareRes, titleCompareRes, resuleNavigate;
-        int time = 3;
+    public boolean goToPagesAndVerifyPages(String[] pageTitle){
+        /*
+        for (int i=1; i < 8; i++){
+        resultToNavigate = yaMainPage.goToPage(By.xpath("//div[@role='navigation']/a["+i+"]"), TITLEPAGES[i]);
+        System.out.println("Result navigate to pages: " + resultToNavigate);
+         */
+        boolean addresCompareRes, titleCompareRes, resuleNavigate = false;
+        //int time = 3;
 
+        for (int i = 1; i < 8; i++){
+            int j = i-1;
+            WebElement element = driver.findElement(By.xpath("//div[@role='navigation']/a["+i+"]"));
+            hrefElements.add(getAttributeHref(element));
+            element.click();
 
-        WebElement element = driver.findElement(locator);
-        hrefElements = getAttributeHref(element);
+            //BaseTest.waitForElements(time);
+            currentURL.add(driver.getCurrentUrl());
+            currentTitle.add(driver.getTitle());
+            addresCompareRes= addressesMatched(hrefElements.get(j), currentURL.get(j));
+            titleCompareRes = titleMatched(pageTitle[i], currentTitle.get(j));
 
-        element.click();
-        BaseTest.waitForElements(time);
+            if(addresCompareRes == titleCompareRes == true)
+                resuleNavigate = true;
+            else{
+                resuleNavigate =false;
+                break;
+            }
+            driver.navigate().back();
 
-        currentURL = driver.getCurrentUrl();
-        currentTitle = driver.getTitle();
-
-        System.out.println("Current URL and Title page is: " + currentURL + " : " +  currentTitle);
-
-        addresCompareRes= addressesMatched(hrefElements, currentURL);
-        titleCompareRes = titleMatched(pageTitle, currentTitle);
-        if(addresCompareRes == titleCompareRes == true)
-            resuleNavigate = true;
-        else
-            resuleNavigate =false;
-
-
-        driver.navigate().back();
-
+        }
         return resuleNavigate;
-
 
     }
 

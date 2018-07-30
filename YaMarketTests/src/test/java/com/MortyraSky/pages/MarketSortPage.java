@@ -1,6 +1,7 @@
 package com.MortyraSky.pages;
 
 import com.MortyraSky.tests.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,8 @@ public class MarketSortPage {
     }
     public WebDriver driver;
     final String nameAttributeElement = "class";
+    String attributeBeforeSort, attributeAfterSort;
+
     //ArrayList<String> stringPriceItems = new ArrayList<String>();
     ArrayList<Integer> priceItems = new ArrayList<Integer>();
 
@@ -34,19 +37,14 @@ public class MarketSortPage {
     private WebElement sortByPrice;
 
 
-    public boolean sortByPrice(){
+    public void sortByPrice(){
         int i = 0,time = 2;
-        boolean result;
-        String attributeBeforeSort, attributeAfterSort;
-
 
         attributeBeforeSort = getAttributeElement(sortByPrice);
         sortByPriceLink.click();
-        BaseTest.waitForElements(time);
-
-
-        attributeAfterSort = getAttributeElement(sortByPrice);
-        BaseTest.waitForElements(time);
+        //BaseTest.waitForElements(time);
+        BaseTest.waitForElement(By.xpath("//*[@class='n-snippet-card2__main-price']"));
+        //BaseTest.waitForElements(time);
         System.out.println("Количество отсортированных элементов по цене : " + sortedPrice.size() );
 
         if (!priceItems.isEmpty())
@@ -61,8 +59,8 @@ public class MarketSortPage {
             //System.out.println("Результат в числовом варианет: " + priceItems.get(i));
             i++;
         }
-        result = isSortByPrice(attributeBeforeSort, attributeAfterSort);
-        return isSortByPrice(attributeBeforeSort, attributeAfterSort);
+        //result = isSortByPrice(attributeBeforeSort, attributeAfterSort);
+        //return isSortByPrice(attributeBeforeSort, attributeAfterSort);
 
         //return true;
         /*
@@ -76,17 +74,16 @@ public class MarketSortPage {
         String attributeElement = element.getAttribute(nameAttributeElement);
         return attributeElement;
 
-        //System.out.println("Attribute sortLink by getText: " + element.getText());
-
     }
 
-    public boolean isSortByPrice(String attributeBefore, String attributeAfter){
-        if (attributeBefore.equals(attributeAfter))
+    public boolean isSortByPrice(){
+        attributeAfterSort = getAttributeElement(sortByPrice);
+        if (attributeBeforeSort.equals(attributeAfterSort))
             return false;
         return true;
     }
 
-    public boolean isSortedItems(){
+    public boolean isSortedItemsByPrice(){
         boolean result = true;
 
         for (int i = 0; i < priceItems.size() - 1; i++){
