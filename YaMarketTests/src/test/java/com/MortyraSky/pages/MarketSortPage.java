@@ -43,8 +43,8 @@ public class MarketSortPage {
         attributeBeforeSort = getAttributeElement(sortByPrice);
         sortByPriceLink.click();
         //BaseTest.waitForElements(time);
-        BaseTest.waitForElement(By.xpath("//*[@class='n-snippet-card2__main-price']"));
-        //BaseTest.waitForElements(time);
+        //BaseTest.waitForElement(By.xpath("//*[@class='n-snippet-card2__main-price']"));
+        BaseTest.waitForElements(time);
         System.out.println("Количество отсортированных элементов по цене : " + sortedPrice.size() );
 
         if (!priceItems.isEmpty())

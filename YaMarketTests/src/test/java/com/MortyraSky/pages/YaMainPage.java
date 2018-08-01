@@ -51,6 +51,7 @@ public class YaMainPage {
 
         for (int i = 1; i < 8; i++){
             int j = i-1;
+            //int time = 1;
             WebElement element = driver.findElement(By.xpath("//div[@role='navigation']/a["+i+"]"));
             hrefElements.add(getAttributeHref(element));
             element.click();

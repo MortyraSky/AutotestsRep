@@ -62,8 +62,8 @@ public class MarketPage {
         actions.moveToElement(menuItemComps);
         actions.perform();
 
-        BaseTest.waitForElement(By.cssSelector("a[href*='54545']"));
-        //BaseTest.waitForElements(time);
+        //BaseTest.waitForElement(By.cssSelector("a[href*='54545']"));
+        BaseTest.waitForElements(time);
 
         subMenuItemPads.click();
 
@@ -100,8 +100,8 @@ public class MarketPage {
             secondValueList.click();
         */
 
-        //BaseTest.waitForElements(time);
-        BaseTest.waitForElementt(By.cssSelector(".n-snippet-card2"));
+        BaseTest.waitForElements(time);
+        //BaseTest.waitForElementt(By.cssSelector(".n-snippet-card2"));
 
         //System.out.println("Количество показанных элементов на странице, выбрав отображение по " +count+ " элементов: " + linksItem.size());
         return linksItem.size();

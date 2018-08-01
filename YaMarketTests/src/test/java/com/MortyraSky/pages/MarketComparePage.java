@@ -57,8 +57,8 @@ public class MarketComparePage {
         actions.moveToElement(addToCompare.get(firstItem));
         addToCompare.get(firstItem).click();
 
-        BaseTest.waitForElement(By.xpath("//*[@class='n-snippet-card2__toolbar']/descendant::div/i[1]"));
-        //BaseTest.waitForElements(time);
+        //BaseTest.waitForElement(By.xpath("//*[@class='n-snippet-card2__toolbar']/descendant::div/i[1]"));
+        BaseTest.waitForElements(time);
 
         actions.moveToElement(addToCompare.get(secondItem));
         addToCompare.get(secondItem).click();
