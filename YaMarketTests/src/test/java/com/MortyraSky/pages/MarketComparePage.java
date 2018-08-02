@@ -1,6 +1,6 @@
-package com.MortyraSky.pages;
+package test.java.com.MortyraSky.pages;
 
-import com.MortyraSky.tests.BaseTest;
+import test.java.com.MortyraSky.tests.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package com.MortyraSky.tests;
+package test.java.com.MortyraSky.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,9 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "./src/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //driver.get("https://market.yandex.ru");
+        System.out.println("Запуск метода сетДрайвер во время запуска маин тест");
 
     }
 
